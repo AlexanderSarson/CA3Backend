@@ -10,8 +10,14 @@ cache:
   directories:
     - $HOME/.m2
 
+addons:
+  sonarcloud:
+    organization: "alexandersarson"
+    token:
+      secure: "WGxhB6RSINkcOQ6pac6IDGZDDuxPNvFd5k3J0pSTztAFm8W84XpCsZXuol34ydDTLxW7SBFfAlkbuEgj3cMsW0wO6oOc7PVYG/Bpvovk6pumRGF1BlhC0MbNvBSEAT210bZEdlAot5jectIOagC0VyC0Ws6RLDpgPv3uibrx93uflafrZba8paN6q9KbqLYpO/QF70g8rbCeNxfLko1W3IbNOOTKZPmAGRFMYqoov2VRr6IMQjzABgh2Uqipmjoobq6kzorFAowna/e2WVmJQUC+BwvJpcb0TYvCXXu7tq9LYrvLJnepV23pcq+HFt1hs0vXAwWh6xQQfhN0b/WuYi/Ab94EOAJ2sgA4iEbEZRkFv6hp7zvpn3vxjZREARUdilNUTD8N/ULIxGR5VehGrWnSJum6W3M7BiLq3rnERPbalVW0Fk+9oh14ET9ZlUetOD7irpx/WVCqlvnQnsVeIzqry2lBrQqqqk/c5qo6c2mSSiYPuFT9o/8mov4MDwCNTJyFij2ooge8j2JS1mtVmkFHYrIZQ7wvqF3cPiYH21wPvwvu/H46oEXb+WWcwuc3kThnVh2bIm6udfffrbZZOzV49TRb8+XqdE8dav7ffWq09sXCITRDCroS0MuX4r3fNajq5eAuNZDsKVSWg2wZ5n9Qkdx5eJoNiQKtgnIYB0c="
+
 script:
-  - mvn test
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=CA3Backend
   - mvn -Dremote.user=$REMOTE_USER -Dremote.password=$REMOTE_PW tomcat7:deploy
 
 services:
